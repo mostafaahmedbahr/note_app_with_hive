@@ -6,11 +6,19 @@ class CustomAddNoteBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(padding: EdgeInsets.symmetric(horizontal: 16),
+    return  Padding(padding: const EdgeInsets.symmetric(horizontal: 16),
     child: Column(
-      children: [
+      children:const [
         SizedBox(height: 32,),
-        CustomTextField(),
+        CustomTextField(
+          hintText: "Title",
+          maxLines: 1,
+        ),
+        SizedBox(height: 16,),
+        CustomTextField(
+          hintText: "Content",
+          maxLines: 7,
+        ),
       ],
 
     ),);
