@@ -3,15 +3,16 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:note_app_with_sql_tharwet_thamy/views/notes_view.dart';
 
 import 'constants/consts.dart';
+import 'models/note_model.dart';
 
 void main()async {
   await Hive.initFlutter();
   await Hive.openBox(kNotesBox);
+  Hive.registerAdapter(NoteModelAdapter());
   runApp(const NotesApp());
 }
 class NotesApp extends StatelessWidget {
   const NotesApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
