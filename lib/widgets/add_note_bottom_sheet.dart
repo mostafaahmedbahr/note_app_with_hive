@@ -27,12 +27,15 @@ import 'add_note_form.dart';
         },
         builder: (context,state){
           // var cubit = AddNoteCubit.get(context);
-          return const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: SingleChildScrollView(
-                // ModalProgressHUD لازم تكون فوق السكرول لازم لازم لازم
-                child: AddNoteForm(),
-              ));
+          return AbsorbPointer(
+            absorbing: state is AddNoteLoadingState ? true : false,
+            child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: SingleChildScrollView(
+                  // ModalProgressHUD لازم تكون فوق السكرول لازم لازم لازم
+                  child: AddNoteForm(),
+                )),
+          );
         },
 
       ),
