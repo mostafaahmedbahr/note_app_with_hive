@@ -29,9 +29,10 @@ import 'add_note_form.dart';
           // var cubit = AddNoteCubit.get(context);
           return AbsorbPointer(
             absorbing: state is AddNoteLoadingState ? true : false,
-            child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: SingleChildScrollView(
+            child:  Padding(
+                padding: EdgeInsets.only(right: 16 , left: 16 ,
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: const SingleChildScrollView(
                   // ModalProgressHUD لازم تكون فوق السكرول لازم لازم لازم
                   child: AddNoteForm(),
                 )),
