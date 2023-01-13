@@ -24,7 +24,7 @@ import 'add_note_form.dart';
         }
       },
       builder: (context,state){
-        var cubit = AddNoteCubit.get(context);
+        // var cubit = AddNoteCubit.get(context);
         return ModalProgressHUD(
             inAsyncCall : state is AddNoteLoadingState ? true : false ,
           child: const Padding(
