@@ -3,11 +3,11 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:note_app_with_sql_tharwet_thamy/bloc/states.dart';
 import 'package:note_app_with_sql_tharwet_thamy/constants/consts.dart';
 import 'package:note_app_with_sql_tharwet_thamy/models/note_model.dart';
-class AppCubit extends Cubit<AppStates> {
+class AddNoteCubit extends Cubit<AppStates> {
 
-  AppCubit() : super(AddNoteInitialState());
+  AddNoteCubit() : super(AddNoteInitialState());
 
-  static AppCubit get(context) => BlocProvider.of(context);
+  static AddNoteCubit get(context) => BlocProvider.of(context);
 
   addNote(NoteModel note)async{
     emit(AddNoteLoadingState());
@@ -20,4 +20,7 @@ class AppCubit extends Cubit<AppStates> {
       emit(AddNoteErrorState(error.toString()));
     }
   }
+
+
+
 }
