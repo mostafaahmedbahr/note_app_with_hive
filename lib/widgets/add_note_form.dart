@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:note_app_with_sql_tharwet_thamy/bloc/cubit.dart';
+import 'package:note_app_with_sql_tharwet_thamy/models/note_model.dart';
 import 'package:note_app_with_sql_tharwet_thamy/widgets/custom_text_field.dart';
 
 import '../constants/consts.dart';
@@ -48,6 +51,13 @@ class _AddNoteFormState extends State<AddNoteForm> {
                 if(formKey.currentState!.validate())
                 {
                   formKey.currentState!.save();
+                  var noteModel = NoteModel(
+                      color: Colors.green.value,
+                      noteContent: content!,
+                      noteTitle: title!,
+                      date: DateTime.now().toString(),
+                  );
+                  BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
                 }
                 else{
                   autoValidateMode = AutovalidateMode.always;

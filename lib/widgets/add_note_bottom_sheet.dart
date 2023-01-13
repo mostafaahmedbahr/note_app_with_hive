@@ -10,31 +10,35 @@ import 'add_note_form.dart';
     const CustomAddNoteBottomSheet({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AddNoteCubit,AppStates>(
-      listener: (context,state){
-        // if(state is AddNoteLoadingState){
-        //   AddNoteCubit.get(context).isLoading = true;
-        // }
-        if(state is AddNoteErrorState){
-          print("error in add note >>>>>>");
-          print(state.error);
-        }
-        if(state is AddNoteSuccessState){
-          Navigator.pop(context);
-        }
-      },
-      builder: (context,state){
-        // var cubit = AddNoteCubit.get(context);
-        return ModalProgressHUD(
-            inAsyncCall : state is AddNoteLoadingState ? true : false ,
-          child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: SingleChildScrollView(
-                child: AddNoteForm(),
-              )),
-        );
-      },
+    return BlocProvider(
+      create: (context)=>AddNoteCubit(),
+      child: BlocConsumer<AddNoteCubit,AppStates>(
+        listener: (context,state){
+          // if(state is AddNoteLoadingState){
+          //   AddNoteCubit.get(context).isLoading = true;
+          // }
+          if(state is AddNoteErrorState){
+            print("error in add note >>>>>>");
+            print(state.error);
+          }
+          if(state is AddNoteSuccessState){
+            Navigator.pop(context);
+          }
+        },
+        builder: (context,state){
+          // var cubit = AddNoteCubit.get(context);
+          return ModalProgressHUD(
+              inAsyncCall : state is AddNoteLoadingState ? true : false ,
+            child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: SingleChildScrollView(
+                  // ModalProgressHUD لازم تكون فوق السكرول لازم لازم لازم
+                  child: AddNoteForm(),
+                )),
+          );
+        },
 
+      ),
     );
   }
 }
