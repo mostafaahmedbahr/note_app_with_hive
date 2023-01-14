@@ -25,10 +25,9 @@ class _AddNoteFormState extends State<AddNoteForm> {
     Colors.red,
     Colors.yellow,
     Colors.grey,
-    Colors.yellow,
     Colors.blue,
     Colors.white,
-    Colors.purple,
+     Colors.purple,
     Colors.deepOrange,
     Colors.tealAccent,
     Colors.deepPurpleAccent,
@@ -106,7 +105,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                           var currentDate = DateTime.now();
                           var formattedCurrentDate = DateFormat.yMEd().format(currentDate);
                           var noteModel = NoteModel(
-                            color: Colors.green.value,
+                            color: colors[colorItemIndex].value,
                             noteContent: content!,
                             noteTitle: title!,
                             date: formattedCurrentDate,
@@ -152,7 +151,7 @@ final Color color;
     ) :
       CircleAvatar(
       radius: 18,
-      backgroundColor: Colors.white,
+      backgroundColor : Colors.white,
       child:   CircleAvatar(
         backgroundColor:color,
         radius: 15,
