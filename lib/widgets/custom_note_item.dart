@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:note_app_with_sql_tharwet_thamy/models/note_model.dart';
 import 'package:note_app_with_sql_tharwet_thamy/views/edit_note_view.dart';
 class CustomNoteItem extends StatelessWidget {
-  const CustomNoteItem({Key? key}) : super(key: key);
+  const CustomNoteItem({Key? key, required this.noteModel , }) : super(key: key);
 
+  final NoteModel noteModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -15,7 +17,7 @@ class CustomNoteItem extends StatelessWidget {
       child: Container(
         padding:const EdgeInsets.only(top:24,bottom:24,left: 16),
         decoration: BoxDecoration(
-          color: const Color(0xffffcc80),
+          color:   Color(noteModel.color),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
@@ -23,13 +25,13 @@ class CustomNoteItem extends StatelessWidget {
           children: [
             ListTile(
               // contentPadding: const EdgeInsets.all(0),
-              title: const Text("Flutter tips",style: TextStyle(
+              title:  Text(noteModel.noteTitle,style:const TextStyle(
                 color: Colors.black87,
                 fontSize: 26,
               ),),
               subtitle:    Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Text("note number 1 from the course",style: TextStyle(
+                child: Text(noteModel.noteContent,style: TextStyle(
                   color: Colors.black87.withOpacity(0.5),
                   fontSize: 18,
                 ),),
@@ -40,7 +42,7 @@ class CustomNoteItem extends StatelessWidget {
               ),
             ),
             Padding(padding:const  EdgeInsets.only(right: 24 ),
-              child:  Text("1 / 11 / 2023",
+              child:  Text(noteModel.date,
                 style: TextStyle(
                     color: Colors.black87.withOpacity(0.4),
                     fontSize: 16

@@ -8,19 +8,16 @@ class NotesCubit extends Cubit<NotesStates> {
   NotesCubit() : super(NotesInitialState());
 
   static NotesCubit get(context) => BlocProvider.of(context);
-
+  List? allNotes;
   fetchAllNotes( )async{
     // emit(NotesLoadingState());
     // مش محتاجين عشان الداتا بتيجى بسرعه لحظه ال READ
-    try{
+   // هنا مش هنستخدم try عشان مش ف احتياج ليها
       var notesBox = Hive.box(kNotesBox);
-      List allNotes = notesBox.values.toList();
+        allNotes = notesBox.values.toList();
       await notesBox.get(allNotes);
-      emit(NotesSuccessState(allNotes));
-    }on Exception catch(error){
-      print("error in add note");
-      emit(NotesErrorState(error.toString()));
-    }
+      emit(NotesSuccessState(allNotes!));
+
   }
 
 
