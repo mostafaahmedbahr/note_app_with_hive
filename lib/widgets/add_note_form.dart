@@ -20,6 +20,19 @@ class _AddNoteFormState extends State<AddNoteForm> {
   final formKey = GlobalKey<FormState>();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   String? title , content;
+  var colorItemIndex = 0;
+  List<Color> colors = [
+    Colors.red,
+    Colors.yellow,
+    Colors.grey,
+    Colors.yellow,
+    Colors.blue,
+    Colors.white,
+    Colors.purple,
+    Colors.deepOrange,
+    Colors.tealAccent,
+    Colors.deepPurpleAccent,
+  ];
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -42,6 +55,31 @@ class _AddNoteFormState extends State<AddNoteForm> {
             onSaved: (value){
               content = value;
             },
+          ),
+          const SizedBox(height: 16,),
+          SizedBox(
+            height: 40,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+              itemBuilder: (context,index)
+              {
+                return   GestureDetector(
+                  onTap: (){
+                    setState((){
+                      colorItemIndex=index;
+                    });
+                  },
+                  child: ColorItem(
+                    isActive:colorItemIndex==index ? true : false,
+                    color: colors[index],
+                  ),
+                );
+              },
+              separatorBuilder: (context,index){
+                return const SizedBox(width: 10,);
+              },
+              itemCount: colors.length,
+          ),
           ),
           const SizedBox(height: 16,),
           BlocBuilder<AddNoteCubit,AppStates>(
@@ -97,6 +135,27 @@ class _AddNoteFormState extends State<AddNoteForm> {
           const SizedBox(height: 16,),
         ],
 
+      ),
+    );
+  }
+}
+
+class ColorItem extends StatelessWidget {
+    ColorItem({Key? key,required this.isActive, required this.color}) : super(key: key);
+  final bool? isActive;
+final Color color;
+  @override
+  Widget build(BuildContext context) {
+    return isActive == false ?   CircleAvatar(
+      backgroundColor: color,
+      radius: 15,
+    ) :
+      CircleAvatar(
+      radius: 18,
+      backgroundColor: Colors.white,
+      child:   CircleAvatar(
+        backgroundColor:color,
+        radius: 15,
       ),
     );
   }
