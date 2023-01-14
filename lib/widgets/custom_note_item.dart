@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:note_app_with_sql_tharwet_thamy/bloc/notes_cubit/notes_cubit.dart';
 import 'package:note_app_with_sql_tharwet_thamy/models/note_model.dart';
 import 'package:note_app_with_sql_tharwet_thamy/views/edit_note_view.dart';
 class CustomNoteItem extends StatelessWidget {
@@ -11,7 +12,9 @@ class CustomNoteItem extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         Navigator.push(context,MaterialPageRoute(builder: (context){
-          return const EditNoteView();
+          return   EditNoteView(
+            noteModel: noteModel,
+          );
         }));
       },
       child: Container(
@@ -39,6 +42,7 @@ class CustomNoteItem extends StatelessWidget {
               trailing: IconButton(
                 onPressed: (){
                   noteModel.delete();
+                  NotesCubit.get(context).fetchAllNotes();
                 },
                 icon:const Icon(FontAwesomeIcons.trash,color: Colors.black87,size: 24,),
               ),

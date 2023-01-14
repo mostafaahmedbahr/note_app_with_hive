@@ -7,6 +7,7 @@ import 'package:note_app_with_sql_tharwet_thamy/models/note_model.dart';
 import 'package:note_app_with_sql_tharwet_thamy/widgets/custom_text_field.dart';
 import 'package:intl/intl.dart';
 
+import '../bloc/notes_cubit/notes_cubit.dart';
 import '../constants/consts.dart';
 class AddNoteForm extends StatefulWidget {
   const AddNoteForm({Key? key}) : super(key: key);
@@ -78,6 +79,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                           autoValidateMode = AutovalidateMode.always;
                           setState((){});
                         }
+                        NotesCubit.get(context).fetchAllNotes();
                       },
                       child: const Text("Add",
                         style: TextStyle(

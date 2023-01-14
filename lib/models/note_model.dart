@@ -7,16 +7,16 @@ part 'note_model.g.dart';
 class NoteModel extends HiveObject
 {
   @HiveField(0)
-  final String noteTitle;
+    String noteTitle;
 
   @HiveField(1)
-  final String noteContent;
+    String noteContent;
 
   @HiveField(2)
   final String date;
 
   @HiveField(3)
-  final int color;
+    int color;
 
   NoteModel({
     required this.color,
