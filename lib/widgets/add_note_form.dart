@@ -5,6 +5,7 @@ import 'package:note_app_with_sql_tharwet_thamy/bloc/cubit.dart';
 import 'package:note_app_with_sql_tharwet_thamy/bloc/states.dart';
 import 'package:note_app_with_sql_tharwet_thamy/models/note_model.dart';
 import 'package:note_app_with_sql_tharwet_thamy/widgets/custom_text_field.dart';
+import 'package:intl/intl.dart';
 
 import '../constants/consts.dart';
 class AddNoteForm extends StatefulWidget {
@@ -63,11 +64,13 @@ class _AddNoteFormState extends State<AddNoteForm> {
                         if(formKey.currentState!.validate())
                         {
                           formKey.currentState!.save();
+                          var currentDate = DateTime.now();
+                          var formattedCurrentDate = DateFormat.yMEd().format(currentDate);
                           var noteModel = NoteModel(
                             color: Colors.green.value,
                             noteContent: content!,
                             noteTitle: title!,
-                            date: DateTime.now().toString(),
+                            date: formattedCurrentDate,
                           );
                           BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
                         }
