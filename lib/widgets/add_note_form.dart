@@ -111,6 +111,8 @@ class _AddNoteFormState extends State<AddNoteForm> {
                             date: formattedCurrentDate,
                           );
                           BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+                          var snackBar = const SnackBar(content: Text('The note has been added successfully'));
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
                         else{
                           autoValidateMode = AutovalidateMode.always;

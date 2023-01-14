@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:note_app_with_sql_tharwet_thamy/bloc/notes_cubit/notes_cubit.dart';
@@ -41,8 +42,26 @@ class CustomNoteItem extends StatelessWidget {
               ),
               trailing: IconButton(
                 onPressed: (){
-                  noteModel.delete();
-                  NotesCubit.get(context).fetchAllNotes();
+
+                  showDialog(context: context, builder: (context){
+                    return CupertinoAlertDialog(
+                      title:const Text("Delete Note ?"),
+                      actions: [
+                        CupertinoDialogAction(child: const Text("Yes"),
+                        onPressed: (){
+                          noteModel.delete();
+                          NotesCubit.get(context).fetchAllNotes();
+                          Navigator.pop(context);
+                        },
+                        ),
+                        CupertinoDialogAction(child:const Text("No"),
+                        onPressed: (){
+                          Navigator.pop(context);
+                        },
+                        ),
+                      ],
+                    );
+                  });
                 },
                 icon:const Icon(FontAwesomeIcons.trash,color: Colors.black87,size: 24,),
               ),
